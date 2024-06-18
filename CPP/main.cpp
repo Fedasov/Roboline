@@ -23,6 +23,9 @@ Message parseMessage(const std::vector<unsigned char>& bytes) {
         msg.WriteValue = bytes[3];
         msg.CRC = bytes[4];
     }
+    else {
+        msg.CRC = bytes[3];
+    }
 
     return msg;
 }
@@ -45,10 +48,10 @@ unsigned char crc8(const std::vector<unsigned char>& data) {
 }
 
 int main() {
-    //std::vector<unsigned char> bytes = { 0x01, 0x03, 0x01, 0x53 };
+    std::vector<unsigned char> bytes = { 0x01, 0x03, 0x01, 0x53 };
     //std::vector<unsigned char> bytes = { 0x3A, 0x01, 0x10, 0x03 };
     //std::vector<unsigned char> bytes = { 0xAB, 0x06, 0x4C, 0x13, 0xA8 };
-    std::vector<unsigned char> bytes = { 0x0C, 0x05, 0x04, 0x00, 0x7C };
+    //std::vector<unsigned char> bytes = { 0x0C, 0x05, 0x04, 0x00, 0x7C };
     Message msg = parseMessage(bytes);
 
     std::cout << "Device Address: " << (int)msg.DeviceAddress << std::endl;
